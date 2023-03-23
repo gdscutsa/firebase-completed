@@ -6,6 +6,15 @@ import {
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+} from 'firebase/firestore';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,15 +32,24 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const googleProvider = new GoogleAuthProvider();
+export const db = getFirestore(app);
 export const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 export const signInWithGoogle = async () => {
-  console.log(process.env.REACT_APP_FIREBASE_API_KEY);
   try {
     const res = await signInWithPopup(auth, googleProvider);
-    let user = res.user;
-    console.log(user);
+    const user = res.user;
+    const q = query(collection(db, 'users'), where('uid', '==', user.uid));
+    const docs = await getDocs(q);
+    if (docs.docs.length === 0) {
+      await addDoc(collection(db, 'users'), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: 'google',
+        email: user.email,
+      });
+    }
   } catch (err) {
     console.error(err);
     alert(err.message);

@@ -9,9 +9,6 @@ export function Header() {
 
   return (
     <header className="flex flex-row justify-between items-center pb-4">
-      {/* <Link to="/" className="text-3xl font-bold">
-        Movies
-      </Link> */}
       <Link className="flex flex-row items-center space-x-2" to="/">
         <span
           className="h-5 w-5 rounded-full 

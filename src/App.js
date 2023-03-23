@@ -1,10 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import { Movies } from './routes/Movies';
-import { MoviePage } from './routes/Movie';
+import { MoviePage } from './routes/MoviePage';
 
 function App() {
-  console.log(process.env.REACT_APP_FIREBASE_API_KEY);
-
   return (
     <div className="App">
       <Routes>
