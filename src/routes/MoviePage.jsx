@@ -6,7 +6,13 @@ import { useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Review } from '../components/Review';
 
-import { addReview, getAverageRating, getReviews, movies } from '../reviews';
+import {
+  addReview,
+  getAverageRating,
+  getReviews,
+  movies,
+  deleteReview,
+} from '../reviews';
 
 export function MoviePage() {
   const [user] = useAuthState(auth);
@@ -40,10 +46,19 @@ export function MoviePage() {
       displayName: user.displayName,
       userId: user.uid,
     });
+
     setReviews(await getReviews({ movieId: id }));
+    setAverageRating(await getAverageRating({ movieId: id }));
 
     setRating('');
     setReview('');
+  };
+
+  const onDelete = async (reviewId) => {
+    await deleteReview({ reviewId });
+
+    setReviews(await getReviews({ movieId: id }));
+    setAverageRating(await getAverageRating({ movieId: id }));
   };
 
   return (
@@ -67,7 +82,13 @@ export function MoviePage() {
         {reviews && reviews.length > 0 ? (
           <ul>
             {reviews.map((review) => {
-              return <Review review={review} />;
+              return (
+                <Review
+                  review={review}
+                  canDelete={user && user.uid === review.userId}
+                  onDelete={onDelete}
+                />
+              );
             })}
           </ul>
         ) : (
