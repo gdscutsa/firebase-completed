@@ -1,9 +1,9 @@
 import React from 'react';
 import { MovieCard } from '../components/MovieCard';
 import { Header } from '../components/Header';
-import { movies } from '../reviews';
+import { movies } from '../constants/movies';
 
-export function Movies() {
+export function Home() {
   return (
     <main className="container max-w-5xl p-4 py-8 mx-auto">
       <Header />

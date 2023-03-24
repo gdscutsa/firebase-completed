@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
-import { Movies } from './routes/Movies';
-import { MoviePage } from './routes/MoviePage';
+import { Home } from './routes/Home';
+import { Movie } from './routes/Movie';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Movies />} />
-        <Route path="/movie/:id" element={<MoviePage />}></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/movie/:id" element={<Movie />}></Route>
       </Routes>
     </div>
   );

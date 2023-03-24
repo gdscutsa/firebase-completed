@@ -6,16 +6,18 @@ import { useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Review } from '../components/Review';
 
+import { movies } from '../constants/movies';
+
 import {
   addReview,
   getAverageRating,
   getReviews,
-  movies,
   deleteReview,
 } from '../reviews';
 
-export function MoviePage() {
+export function Movie() {
   const [user] = useAuthState(auth);
+
   const { id } = useParams();
 
   const [rating, setRating] = useState('');
