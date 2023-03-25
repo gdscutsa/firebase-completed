@@ -1,7 +1,7 @@
 export function Review({ review, canDelete = false, onDelete }) {
   return (
     <div className="grid grid-cols-5 justify-start items-start py-3 gap-4">
-      <div className="w-56">
+      <div>
         <h2 className="text-xl font-bold overflow-hidden whitespace-nowrap text-ellipsis">
           {review.displayName}
         </h2>
